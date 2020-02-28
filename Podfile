@@ -6,6 +6,7 @@ target 'Alura Viagens' do
   use_frameworks!
   
   pod 'Alamofire'
+  pod 'AlamofireImage'
 
   # Pods for Alura Viagens
 

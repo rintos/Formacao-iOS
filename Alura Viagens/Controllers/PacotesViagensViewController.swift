@@ -32,10 +32,6 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
         configCollectionView()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        getListaPacotes()
-    }
-    
     // MARK: - Métodos
     
     func atualizaContadorLabel() -> String {
@@ -45,7 +41,7 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
     func getListaPacotes() {
         PacotesAPI().recuperaListaDePacotesAPI(completion: { (listaPacotes) in
             for item in listaPacotes {
-                print("Pacote----> \(item.nomeDoHotel) quantidadeDias:\(item.quantidadeDeDias)")
+               // print("Pacote----> \(item.nomeDoHotel) URL IMagem:\(item.imageUrl)")
                 self.listaDePacotes.append(item)
             }
             self.listaViagens = self.listaDePacotes

@@ -28,11 +28,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         configuraViews()
         getListaViagens()
         configTableView()
-    
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        getListaViagens()
     }
     
     // MARK: - Métodos
@@ -51,7 +46,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         ViagensAPI().recuperaListaDeViagensAPI(completion: { (listaViagens) in
             for item in listaViagens {
-               // print("Titulo de Viagem: \(item.titulo)")
+                print("Titulo de Viagem: \(item.titulo) Localizacao: \(item.localizacao)")
                 self.listaDeViagens.append(item)
             }
             self.tabelaViagens.reloadData()
@@ -60,16 +55,40 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    @objc func mostrarMapa(_ gestureRecognizer: UILongPressGestureRecognizer) {
+        if gestureRecognizer.state == .began {
+            let cell = gestureRecognizer.view as! UITableViewCell
+            guard let indexPath = tabelaViagens.indexPath(for: cell) else { return }
+            let viagem = listaDeViagens[indexPath.row]
+            print("Viagem Selecionada no UILongPressRecognizer: \(viagem.titulo)")
+            goToMap(viagem.localizacao)
+        }
+    }
+    
+    func goToMap(_ local:String) {
+        let mapViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MapViewController") as! MapViewController
+        mapViewController.localizacao = local
+        navigationController?.pushViewController(mapViewController, animated: true)
+    }
+    
+    
     // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listaDeViagens.count
     }
     
+    
+//    let longPress = UILongPressGestureRecognizer(target: self, action: #selector(mostrarDetalhes(_:)))
+//    celula.addGestureRecognizer(longPress)
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
         let viagemAtual = listaDeViagens[indexPath.row]
         cell.configuraCelula(viagemAtual)
+        
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(mostrarMapa))
+        cell.addGestureRecognizer(longPress)
         
         return cell
     }
