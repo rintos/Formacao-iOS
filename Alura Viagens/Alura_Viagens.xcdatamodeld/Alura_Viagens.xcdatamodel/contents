@@ -10,9 +10,8 @@
         <attribute name="preco" optional="YES" attributeType="String"/>
         <attribute name="quantidadeDeDias" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="titulo" optional="YES" attributeType="String"/>
-        <attribute name="viagem" optional="YES" attributeType="Transformable"/>
     </entity>
     <elements>
-        <element name="PacotesDeViagens" positionX="-63" positionY="-18" width="128" height="193"/>
+        <element name="PacotesDeViagens" positionX="-63" positionY="-18" width="128" height="178"/>
     </elements>
 </model>

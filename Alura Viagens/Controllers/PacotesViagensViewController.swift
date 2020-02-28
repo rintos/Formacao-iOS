@@ -18,7 +18,6 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
     
     // MARK: - Atributos
     
-    let listaComTodasViagens: [PacoteViagem] = PacoteViagemDao().retornaTodasAsViagens()
     var listaViagens: [PacoteViagem] = []
     var listaDePacotes: [PacoteViagem] = []
     var verificaFavorito: Bool = true
@@ -70,7 +69,7 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         listaViagens = listaDePacotes
         if searchText != "" {
-            listaViagens = listaViagens.filter({ $0.viagem.titulo.contains(searchText) })
+            listaViagens = listaViagens.filter({ $0.titulo.contains(searchText) })
         }
         labelContadorPacotes.text = atualizaContadorLabel()
         colecaoPacotesViagens.reloadData()

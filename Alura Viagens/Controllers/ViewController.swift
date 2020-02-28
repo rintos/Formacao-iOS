@@ -18,7 +18,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK: - Atributos
     
-    let listaViagens:[Viagem] = ViagemDao().retornaTodasAsViagens()
     var listaDeViagens: [Viagem] = []
     
     // MARK: - View Life Cycle

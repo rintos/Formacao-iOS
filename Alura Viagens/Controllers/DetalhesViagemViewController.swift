@@ -38,11 +38,11 @@ class DetalhesViagemViewController: UIViewController {
     
     func configuraOutlets() {
         guard let pacote = pacoteSelecionado else { return }
-        imagemPacoteViagem.image = UIImage(named: pacote.viagem.caminhoDaImagem)
-        labelTituloPacoteViagem.text = pacote.viagem.titulo
+        imagemPacoteViagem.image = UIImage(named: pacote.imageUrl)
+        labelTituloPacoteViagem.text = pacote.titulo
         labelDescricaoPacoteViagem.text = pacote.descricao
         labelDataViagem.text = pacote.dataViagem
-        labelPrecoPacoteViagem.text = pacote.viagem.preco
+        labelPrecoPacoteViagem.text = pacote.preco
     }
     
     @objc func redimensionaScrollView(_ notification: Notification) {

@@ -20,9 +20,8 @@ class PacoteViagem {
     let nomeDoHotel: String
     let descricao: String
     let dataViagem: String
-    let viagem: Viagem
     
-    init(id: Int = 0,titulo: String = "", quantidadeDeDias: Int = 0, preco:String = "", imageUrl: String = "", localizacao:String = "",  nomeDoHotel: String, descricao: String, dataViagem: String, viagem: Viagem) {
+    init(id: Int = 0,titulo: String = "", quantidadeDeDias: Int = 0, preco:String = "", imageUrl: String = "", localizacao:String = "",  nomeDoHotel: String, descricao: String, dataViagem: String) {
         self.id = id
         self.titulo = titulo
         self.quantidadeDeDias = quantidadeDeDias
@@ -32,12 +31,10 @@ class PacoteViagem {
         self.nomeDoHotel = nomeDoHotel
         self.descricao = descricao
         self.dataViagem = dataViagem
-        self.viagem = viagem
     }
     
     convenience init() {
-        let viagem = Viagem()
-        self.init(id: 0, titulo: "", quantidadeDeDias: 0, preco: "", imageUrl: "", localizacao: "", nomeDoHotel: "", descricao: "", dataViagem: "", viagem: viagem)
+        self.init(id: 0, titulo: "", quantidadeDeDias: 0, preco: "", imageUrl: "", localizacao: "", nomeDoHotel: "", descricao: "", dataViagem: "")
     }
     
     func desserializaPacoteViagem (pacoteDict: [Dictionary<String, Any>]) -> [PacoteViagem] {
@@ -54,7 +51,7 @@ class PacoteViagem {
             let servico = itemDict["servico"] as? String ?? ""
             let data = itemDict["data"] as? String ?? ""
             
-            let pacote = PacoteViagem(id: id, titulo: titulo, quantidadeDeDias: quantidadeDeDias, preco: preco, imageUrl: imageUrl, localizacao: localizacao, nomeDoHotel: nomeDoHotel, descricao: servico, dataViagem: data, viagem: viagem)
+            let pacote = PacoteViagem(id: id, titulo: titulo, quantidadeDeDias: quantidadeDeDias, preco: preco, imageUrl: imageUrl, localizacao: localizacao, nomeDoHotel: nomeDoHotel, descricao: servico, dataViagem: data)
             
             listaPacoteViagem.append(pacote)
         }
