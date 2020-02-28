@@ -44,6 +44,8 @@
 		981D5F9C24097FED0075BC35 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981D5F9B24097FED0075BC35 /* MapViewController.swift */; };
 		981D5FA124098BB30075BC35 /* Pino.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981D5FA024098BB30075BC35 /* Pino.swift */; };
 		981D5FA324098FE40075BC35 /* Localizacao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981D5FA224098FE40075BC35 /* Localizacao.swift */; };
+		981D5FA52409AFA80075BC35 /* FavoritosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981D5FA42409AFA80075BC35 /* FavoritosViewController.swift */; };
+		981D5FA72409B6E10075BC35 /* FavoritosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981D5FA62409B6E10075BC35 /* FavoritosCollectionViewCell.swift */; };
 		ADD07DCA01E990415E8BDFFE /* Pods_Alura_Viagens.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D4DF07AE7E7321496C2753 /* Pods_Alura_Viagens.framework */; };
 /* End PBXBuildFile section */
 
@@ -89,6 +91,8 @@
 		981D5F9B24097FED0075BC35 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		981D5FA024098BB30075BC35 /* Pino.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pino.swift; sourceTree = "<group>"; };
 		981D5FA224098FE40075BC35 /* Localizacao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizacao.swift; sourceTree = "<group>"; };
+		981D5FA42409AFA80075BC35 /* FavoritosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritosViewController.swift; sourceTree = "<group>"; };
+		981D5FA62409B6E10075BC35 /* FavoritosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritosCollectionViewCell.swift; sourceTree = "<group>"; };
 		FD5B1C5692282ADD951678D2 /* Pods-Alura Viagens.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alura Viagens.debug.xcconfig"; path = "Target Support Files/Pods-Alura Viagens/Pods-Alura Viagens.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -157,6 +161,7 @@
 			children = (
 				0388B00320DC153D005F6A7C /* TableViewCell.swift */,
 				0388B00520DC156E005F6A7C /* PacotesCollectionViewCell.swift */,
+				981D5FA62409B6E10075BC35 /* FavoritosCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -168,6 +173,7 @@
 				030997B420E12DF0009ECA38 /* PacotesViagensViewController.swift */,
 				030B69CE20E153BA006B5424 /* DetalhesViagemViewController.swift */,
 				036A96D020E168DB002EC6AA /* ConfirmacaoPagamentoViewController.swift */,
+				981D5FA42409AFA80075BC35 /* FavoritosViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -388,7 +394,9 @@
 				036A96D120E168DB002EC6AA /* ConfirmacaoPagamentoViewController.swift in Sources */,
 				0388B00620DC156E005F6A7C /* PacotesCollectionViewCell.swift in Sources */,
 				03715B3F20DC06BB00F2250A /* ViewController.swift in Sources */,
+				981D5FA52409AFA80075BC35 /* FavoritosViewController.swift in Sources */,
 				981D5F9A240869AE0075BC35 /* PacotesAPI.swift in Sources */,
+				981D5FA72409B6E10075BC35 /* FavoritosCollectionViewCell.swift in Sources */,
 				0388B03120DC1B62005F6A7C /* PacoteViagemDao.swift in Sources */,
 				03715B2520DC050800F2250A /* AppDelegate.swift in Sources */,
 				981D5FA124098BB30075BC35 /* Pino.swift in Sources */,

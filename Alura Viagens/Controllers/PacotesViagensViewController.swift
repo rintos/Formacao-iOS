@@ -21,21 +21,26 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
     let listaComTodasViagens: [PacoteViagem] = PacoteViagemDao().retornaTodasAsViagens()
     var listaViagens: [PacoteViagem] = []
     var listaDePacotes: [PacoteViagem] = []
+    var verificaFavorito: Bool = true
     
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configCollectionView()
         pesquisarViagens.delegate = self
         labelContadorPacotes.text = atualizaContadorLabel()
         getListaPacotes()
-        configCollectionView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        labelContadorPacotes.text = atualizaContadorLabel()
     }
     
     // MARK: - Métodos
     
     func atualizaContadorLabel() -> String {
-        return listaViagens.count == 1 ? "1 pacote encontrado" : "\(listaViagens.count) pacotes encontrados"
+        return listaDePacotes.count == 1 ? "1 pacote encontrado" : "\(listaDePacotes.count) pacotes encontrados"
     }
     
     func getListaPacotes() {
@@ -56,6 +61,7 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
     func configCollectionView() {
         colecaoPacotesViagens.delegate = self
         colecaoPacotesViagens.dataSource = self
+        colecaoPacotesViagens.reloadData()
     }
     
     
@@ -99,4 +105,16 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return UIDevice.current.userInterfaceIdiom == .phone ? CGSize(width: collectionView.bounds.width/2-20, height: 160) : CGSize(width: collectionView.bounds.width/3-20, height: 250)
     }
+    
+    
+    // MARK: - Action Button
+    
+    @IBAction func favoritarPacoteViagem(_ sender: UIButton) {
+        
+        sender.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        
+    }
+    
+    
+    
 }

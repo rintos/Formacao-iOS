@@ -36,12 +36,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     func localizarAluno() {
         if let viagem = viagemDados {
-            Localizacao().converteEnderecoEmCoordenadas(endereco: viagem.localizacao) { (localEncontrado) in
+            let localCompleto = "\(viagem.localizacao) - \(viagem.titulo)"
+            Localizacao().converteEnderecoEmCoordenadas(endereco: localCompleto) { (localEncontrado) in
                 let pino = Localizacao().configutaPino(titulo: viagem.titulo, localizacao: localEncontrado, cor: nil, icone: nil)
                 self.mapa.addAnnotation(pino)
                 self.mapa.showAnnotations(self.mapa.annotations, animated: true)
             }
         }
+    }
+    
+    
+    @IBAction func buttonAcaoVoltar(_ sender: UIButton) {
+        
+        navigationController?.popViewController(animated: true)
     }
     
 
