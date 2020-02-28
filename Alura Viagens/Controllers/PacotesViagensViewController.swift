@@ -20,14 +20,20 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
     
     let listaComTodasViagens: [PacoteViagem] = PacoteViagemDao().retornaTodasAsViagens()
     var listaViagens: [PacoteViagem] = []
+    var listaDePacotes: [PacoteViagem] = []
     
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         pesquisarViagens.delegate = self
-        listaViagens = listaComTodasViagens
         labelContadorPacotes.text = atualizaContadorLabel()
+        getListaPacotes()
+        configCollectionView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        getListaPacotes()
     }
     
     // MARK: - Métodos
@@ -36,10 +42,31 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
         return listaViagens.count == 1 ? "1 pacote encontrado" : "\(listaViagens.count) pacotes encontrados"
     }
     
+    func getListaPacotes() {
+        PacotesAPI().recuperaListaDePacotesAPI(completion: { (listaPacotes) in
+            for item in listaPacotes {
+                print("Pacote----> \(item.nomeDoHotel) quantidadeDias:\(item.quantidadeDeDias)")
+                self.listaDePacotes.append(item)
+            }
+            self.listaViagens = self.listaDePacotes
+
+            self.colecaoPacotesViagens.reloadData()
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    func configCollectionView() {
+        colecaoPacotesViagens.delegate = self
+        colecaoPacotesViagens.dataSource = self
+    }
+    
+    
     // MARK: - UISearchBarDelegate
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        listaViagens = listaComTodasViagens
+        listaViagens = listaDePacotes
         if searchText != "" {
             listaViagens = listaViagens.filter({ $0.viagem.titulo.contains(searchText) })
         }
@@ -50,12 +77,12 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
     // MARK: - UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return listaViagens.count
+        return listaDePacotes.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let celulaPacote = collectionView.dequeueReusableCell(withReuseIdentifier: "celulaPacote", for: indexPath) as! PacotesCollectionViewCell
-        let pacoteAtual = listaViagens[indexPath.item]
+        let pacoteAtual = listaDePacotes[indexPath.item]
         celulaPacote.configuraCelula(pacoteAtual)
         
         return celulaPacote

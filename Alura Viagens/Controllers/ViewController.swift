@@ -51,7 +51,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         ViagensAPI().recuperaListaDeViagensAPI(completion: { (listaViagens) in
             for item in listaViagens {
-                print("Titulo de Viagem: \(item.titulo)")
+               // print("Titulo de Viagem: \(item.titulo)")
                 self.listaDeViagens.append(item)
             }
             self.tabelaViagens.reloadData()
