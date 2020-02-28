@@ -61,13 +61,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             guard let indexPath = tabelaViagens.indexPath(for: cell) else { return }
             let viagem = listaDeViagens[indexPath.row]
             print("Viagem Selecionada no UILongPressRecognizer: \(viagem.titulo)")
-            goToMap(viagem.localizacao)
+            goToMap(viagem)
         }
     }
     
-    func goToMap(_ local:String) {
+    func goToMap(_ viagemDados:Viagem) {
         let mapViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MapViewController") as! MapViewController
-        mapViewController.localizacao = local
+        mapViewController.viagemDados = viagemDados
         navigationController?.pushViewController(mapViewController, animated: true)
     }
     

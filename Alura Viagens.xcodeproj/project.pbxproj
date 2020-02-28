@@ -42,6 +42,8 @@
 		981D5F98240869870075BC35 /* ViagensAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981D5F97240869870075BC35 /* ViagensAPI.swift */; };
 		981D5F9A240869AE0075BC35 /* PacotesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981D5F99240869AE0075BC35 /* PacotesAPI.swift */; };
 		981D5F9C24097FED0075BC35 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981D5F9B24097FED0075BC35 /* MapViewController.swift */; };
+		981D5FA124098BB30075BC35 /* Pino.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981D5FA024098BB30075BC35 /* Pino.swift */; };
+		981D5FA324098FE40075BC35 /* Localizacao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981D5FA224098FE40075BC35 /* Localizacao.swift */; };
 		ADD07DCA01E990415E8BDFFE /* Pods_Alura_Viagens.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D4DF07AE7E7321496C2753 /* Pods_Alura_Viagens.framework */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +87,8 @@
 		981D5F97240869870075BC35 /* ViagensAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViagensAPI.swift; sourceTree = "<group>"; };
 		981D5F99240869AE0075BC35 /* PacotesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacotesAPI.swift; sourceTree = "<group>"; };
 		981D5F9B24097FED0075BC35 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		981D5FA024098BB30075BC35 /* Pino.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pino.swift; sourceTree = "<group>"; };
+		981D5FA224098FE40075BC35 /* Localizacao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizacao.swift; sourceTree = "<group>"; };
 		FD5B1C5692282ADD951678D2 /* Pods-Alura Viagens.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Alura Viagens.debug.xcconfig"; path = "Target Support Files/Pods-Alura Viagens/Pods-Alura Viagens.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,6 +125,7 @@
 		03715B2320DC050800F2250A /* Alura Viagens */ = {
 			isa = PBXGroup;
 			children = (
+				981D5F9D24098B6D0075BC35 /* Mapa */,
 				981D5F962408695A0075BC35 /* Network */,
 				03715B2420DC050800F2250A /* AppDelegate.swift */,
 				03715B3920DC055200F2250A /* Models */,
@@ -163,7 +168,6 @@
 				030997B420E12DF0009ECA38 /* PacotesViagensViewController.swift */,
 				030B69CE20E153BA006B5424 /* DetalhesViagemViewController.swift */,
 				036A96D020E168DB002EC6AA /* ConfirmacaoPagamentoViewController.swift */,
-				981D5F9B24097FED0075BC35 /* MapViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -208,6 +212,32 @@
 				981D5F99240869AE0075BC35 /* PacotesAPI.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		981D5F9D24098B6D0075BC35 /* Mapa */ = {
+			isa = PBXGroup;
+			children = (
+				981D5F9F24098B830075BC35 /* Model */,
+				981D5F9E24098B7D0075BC35 /* Controller */,
+				981D5FA224098FE40075BC35 /* Localizacao.swift */,
+			);
+			path = Mapa;
+			sourceTree = "<group>";
+		};
+		981D5F9E24098B7D0075BC35 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				981D5F9B24097FED0075BC35 /* MapViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		981D5F9F24098B830075BC35 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				981D5FA024098BB30075BC35 /* Pino.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		C9AADA1442BCF26C69C31992 /* Frameworks */ = {
@@ -361,7 +391,9 @@
 				981D5F9A240869AE0075BC35 /* PacotesAPI.swift in Sources */,
 				0388B03120DC1B62005F6A7C /* PacoteViagemDao.swift in Sources */,
 				03715B2520DC050800F2250A /* AppDelegate.swift in Sources */,
+				981D5FA124098BB30075BC35 /* Pino.swift in Sources */,
 				0388B00C20DC1858005F6A7C /* ViagemDao.swift in Sources */,
+				981D5FA324098FE40075BC35 /* Localizacao.swift in Sources */,
 				0388B00820DC1763005F6A7C /* Viagem.swift in Sources */,
 				981D5F9C24097FED0075BC35 /* MapViewController.swift in Sources */,
 				03715B2D20DC050800F2250A /* Alura_Viagens.xcdatamodeld in Sources */,
