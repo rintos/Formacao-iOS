@@ -21,7 +21,7 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
     var listaViagens: [PacoteViagem] = []
     var listaDePacotes: [PacoteViagem] = []
     var verificaFavorito: Bool = true
-    
+
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
@@ -86,6 +86,17 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
         let pacoteAtual = listaDePacotes[indexPath.item]
         celulaPacote.configuraCelula(pacoteAtual)
         
+//        let botaoFavorito = UIButton(frame: CGRect(x: 92, y: 8, width: 40, height: 40))
+//        botaoFavorito.setImage(UIImage(systemName: "heart"), for: UIControlState.normal)
+//        botaoFavorito.addTarget(self, action: #selector(pacoteViagemFavorito), for: UIControlEvents.touchUpInside)
+//        celulaPacote.addSubview(botaoFavorito)
+        celulaPacote.callback = { [unowned self] in
+            let indexPathSelecionado =  indexPath.row
+            print("indexPath Selecionado\(indexPathSelecionado)")
+            PacoteViagemDao().salvarPacoteViagem(self.listaDePacotes[indexPathSelecionado])
+    
+        }
+        
         return celulaPacote
     }
     
@@ -93,6 +104,7 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let pacote = listaViagens[indexPath.item]
+        print("\(pacote.titulo) clicado")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "detalhes") as! DetalhesViagemViewController
         controller.pacoteSelecionado = pacote
@@ -108,11 +120,21 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
     
     // MARK: - Action Button
     
-    @IBAction func favoritarPacoteViagem(_ sender: UIButton) {
-        
-        sender.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-        
-    }
+//    @IBAction func pacoteViagemFavorito(_ sender: UIButton) -> Void {
+//        
+//
+//        print("pressionado")
+//
+//    }
+    
+//    @IBAction func favoritarPacoteViagem(_ sender: UIButton) {
+//
+//        sender.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+//
+//
+//
+//
+//    }
     
     
     

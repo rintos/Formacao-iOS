@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavoritosViewController: UIViewController {
+class FavoritosViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet weak var favoritosCollectionView: UICollectionView!
 
@@ -16,9 +16,39 @@ class FavoritosViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        configuraCollectionView()
+        
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        favoritosCollectionView.reloadData()
     }
     
 
+    
+    func configuraCollectionView() {
+        favoritosCollectionView.delegate = self
+        favoritosCollectionView.dataSource = self
+        favoritosCollectionView.reloadData()
+    }
+    
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        let listaPacotes = PacoteViagemDao().recuperaPacotesFavoritos()
+        return listaPacotes.count
+
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let celula = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCellFav", for: indexPath) as! FavoritosCollectionViewCell
+        let listaPacotes = PacoteViagemDao().recuperaPacotesFavoritos()
+        let pacote = listaPacotes[indexPath.item]
+        celula.configuraCelula(pacote)
+        
+        return celula
+    }
     
 
 }

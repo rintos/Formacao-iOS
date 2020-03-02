@@ -15,4 +15,11 @@ class FavoritosCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var favoritoPreco: UILabel!
     
     
+    
+    func configuraCelula(_ pacotes: PacotesDeViagens ) {
+        favoritoTitulo.text = pacotes.titulo
+        favoritoQuantidadeDias.text = "\(pacotes.quantidadeDeDias)"
+        favoritoPreco.text = pacotes.preco
+    }
+    
 }

@@ -361,24 +361,8 @@
                                                                             <rect key="frame" x="0.0" y="3.5" width="135" height="79"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                         </imageView>
-                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pjP-hR-Efk">
-                                                                            <rect key="frame" x="92" y="8" width="35" height="35"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="height" constant="35" id="38z-ep-xnk"/>
-                                                                                <constraint firstAttribute="width" constant="35" id="B9V-Mg-ndn"/>
-                                                                            </constraints>
-                                                                            <color key="tintColor" red="0.94117647059999998" green="0.7843137255" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                                            <state key="normal" image="heart" catalog="system"/>
-                                                                            <connections>
-                                                                                <action selector="favoritarPacoteViagem:" destination="jDg-5t-29P" eventType="touchUpInside" id="jNY-k7-iSp"/>
-                                                                            </connections>
-                                                                        </button>
                                                                     </subviews>
                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                                    <constraints>
-                                                                        <constraint firstItem="pjP-hR-Efk" firstAttribute="top" secondItem="P9e-1d-A7Y" secondAttribute="top" constant="8" id="LrF-Dw-rKp"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="pjP-hR-Efk" secondAttribute="trailing" constant="8" id="Png-Sf-L0l"/>
-                                                                    </constraints>
                                                                 </view>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yOA-gA-9ET">
                                                                     <rect key="frame" x="0.0" y="79" width="135" height="20"/>
@@ -1116,7 +1100,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="heart" catalog="system" width="64" height="54"/>
         <image name="icon_airplane.png" width="50" height="50"/>
         <image name="icon_back.png" width="50" height="50"/>
         <image name="icon_breakfast.png" width="50" height="50"/>

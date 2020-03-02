@@ -17,6 +17,16 @@ class PacotesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var labelQuantidadeDias: UILabel!
     @IBOutlet weak var labelPreco: UILabel!
     
+    var callback: (() -> ())?
+    
+    
+    override func awakeFromNib() {
+        let botaoFavorito = UIButton(frame: CGRect(x: 92, y: 8, width: 40, height: 40))
+        botaoFavorito.setImage(UIImage(systemName: "heart"), for: UIControlState.normal)
+        botaoFavorito.addTarget(self, action: #selector(pacoteViagemFavorito), for: UIControlEvents.touchUpInside)
+        addSubview(botaoFavorito)
+    }
+    
     // MARK: - Métodos
     
     func configuraCelula(_ pacoteViagem: PacoteViagem) {
@@ -30,4 +40,12 @@ class PacotesCollectionViewCell: UICollectionViewCell {
         layer.borderColor = UIColor(red: 85.0/255.0, green: 85.0/255.0, blue: 85.0/255.0, alpha: 1).cgColor
         layer.cornerRadius = 8
     }
+    
+    
+    @IBAction func pacoteViagemFavorito(_ sender: UIButton) -> Void {
+        callback?()
+        
+    
+    }
 }
+
