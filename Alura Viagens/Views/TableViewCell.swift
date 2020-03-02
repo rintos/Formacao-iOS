@@ -19,7 +19,8 @@ class TableViewCell: UITableViewCell {
         labelTitulo.text = viagem.titulo
         labelQuantidadeDias.text = viagem.quantidadeDeDias == 1 ? "1 dia" : "\(viagem.quantidadeDeDias) dias"
         labelPreco.text = "R$ \(viagem.preco)"
-        imagemViagem.image = UIImage(named: viagem.caminhoDaImagem)
+        imagemViagem.image = UIImage(named: "\(viagem.id).jpg")
+        print("caminho das imagens \(viagem.caminhoDaImagem)")
         imagemViagem.layer.cornerRadius = 10
         imagemViagem.layer.masksToBounds = true
     }

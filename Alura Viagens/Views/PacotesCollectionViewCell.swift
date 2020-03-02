@@ -21,7 +21,7 @@ class PacotesCollectionViewCell: UICollectionViewCell {
     
     var preencheImagem: Bool = false
     var imagemFavoritoStatus = ""
-    let botaoFavorito = UIButton(frame: CGRect(x: 92, y: 8, width: 40, height: 40))
+    let botaoFavorito = UIButton(frame: CGRect(x: 120, y: 8, width: 40, height: 40))
     
     override func awakeFromNib() {
        // configutaBotaoFavorito()
@@ -35,17 +35,18 @@ class PacotesCollectionViewCell: UICollectionViewCell {
         let quantidadeDias = String(pacoteViagem.quantidadeDeDias)
         labelQuantidadeDias.text = "\(quantidadeDias) dias"
         labelPreco.text = "R$ \(pacoteViagem.preco)"
-        imagemViagem.image = UIImage(named: pacoteViagem.imageUrl)
+        imagemViagem.image = UIImage(named: "\(pacoteViagem.id).jpg")
         
             
         if preencheImagem {
-                imagemFavoritoStatus = "heart.fill"
+                imagemFavoritoStatus = "star.fill"
             } else {
-                imagemFavoritoStatus = "heart"
+                imagemFavoritoStatus = "star"
             }
         
         botaoFavorito.setImage(UIImage(systemName: imagemFavoritoStatus), for: UIControlState.normal)
         botaoFavorito.addTarget(self, action: #selector(pacoteViagemFavorito), for: UIControlEvents.touchUpInside)
+        botaoFavorito.tintColor = .yellow
         addSubview(botaoFavorito)
          
         layer.borderWidth = 0.5
@@ -59,9 +60,9 @@ class PacotesCollectionViewCell: UICollectionViewCell {
         callback?()
         
         if preencheImagem {
-            sender.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            sender.setImage(UIImage(systemName: "star.fill"), for: .normal)
         } else {
-            sender.setImage(UIImage(systemName: "heart"), for: .normal)
+            sender.setImage(UIImage(systemName: "star"), for: .normal)
         }
         
     }

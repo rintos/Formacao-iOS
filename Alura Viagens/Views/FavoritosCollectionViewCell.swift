@@ -18,8 +18,15 @@ class FavoritosCollectionViewCell: UICollectionViewCell {
     
     func configuraCelula(_ pacotes: PacotesDeViagens ) {
         favoritoTitulo.text = pacotes.titulo
-        favoritoQuantidadeDias.text = "\(pacotes.quantidadeDeDias)"
-        favoritoPreco.text = pacotes.preco
+        favoritoQuantidadeDias.text = "\(pacotes.quantidadeDeDias) dias"
+        if let preco = pacotes.preco {
+            favoritoPreco.text = "R$ \(preco)"
+        }
+        favoritoImageView.image = UIImage(named: "\(pacotes.id).jpg")
+        
+        layer.borderWidth = 0.5
+        layer.borderColor = UIColor(red: 85.0/255.0, green: 85.0/255.0, blue: 85.0/255.0, alpha: 1).cgColor
+        layer.cornerRadius = 8
     }
     
 }

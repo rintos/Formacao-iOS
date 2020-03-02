@@ -120,7 +120,7 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
         celulaPacote.configuraCelula(pacoteAtual)
         
         if pacoteAtual.favoritoStatus {
-            celulaPacote.botaoFavorito.setImage(UIImage(systemName: "heart.fill"), for: UIControlState.normal)
+            celulaPacote.botaoFavorito.setImage(UIImage(systemName: "star.fill"), for: UIControlState.normal)
         }
         
         celulaPacote.callback = { [unowned self] in
