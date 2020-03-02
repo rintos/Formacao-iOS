@@ -85,4 +85,17 @@ class PacoteViagemDao: NSObject {
         }
     }
     
+    func deletaPacoteViagem(_ id: Int) {
+        
+        let idCoreData = Int32(id)
+        let listaFavoritos = recuperaPacotesFavoritos()
+        
+        for favorito in listaFavoritos {
+            if favorito.id == idCoreData {
+                contexto.delete(favorito)
+            }
+        }
+        atualizaContexto()
+    }
+    
 }

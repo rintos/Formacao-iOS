@@ -30,10 +30,12 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
         pesquisarViagens.delegate = self
         labelContadorPacotes.text = atualizaContadorLabel()
         getListaPacotes()
+       // verificaFavoritos()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         labelContadorPacotes.text = atualizaContadorLabel()
+        //verificaFavoritos()
     }
     
     // MARK: - Métodos
@@ -48,6 +50,7 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
                // print("Pacote----> \(item.nomeDoHotel) URL IMagem:\(item.imageUrl)")
                 self.listaDePacotes.append(item)
             }
+            
             self.listaViagens = self.listaDePacotes
 
             self.colecaoPacotesViagens.reloadData()
@@ -55,6 +58,21 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
         }) { (error) in
             print(error.localizedDescription)
         }
+    }
+    
+    func verificaFavoritos (_ pacoteSelecionado: PacoteViagem ) -> Bool {
+        
+        let listaPacoteFavorito = PacoteViagemDao().recuperaPacotesFavoritos()
+        
+        for favorito in listaPacoteFavorito {
+            let idFavorito = Int(favorito.id)
+            if idFavorito == pacoteSelecionado.id {
+            print("Filme Favorito\(pacoteSelecionado.titulo)")
+                return true
+            }
+        }
+        return false
+        
     }
     
     func configCollectionView() {
@@ -85,16 +103,19 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
         let celulaPacote = collectionView.dequeueReusableCell(withReuseIdentifier: "celulaPacote", for: indexPath) as! PacotesCollectionViewCell
         let pacoteAtual = listaDePacotes[indexPath.item]
         celulaPacote.configuraCelula(pacoteAtual)
-        
-//        let botaoFavorito = UIButton(frame: CGRect(x: 92, y: 8, width: 40, height: 40))
-//        botaoFavorito.setImage(UIImage(systemName: "heart"), for: UIControlState.normal)
-//        botaoFavorito.addTarget(self, action: #selector(pacoteViagemFavorito), for: UIControlEvents.touchUpInside)
-//        celulaPacote.addSubview(botaoFavorito)
+    
         celulaPacote.callback = { [unowned self] in
             let indexPathSelecionado =  indexPath.row
             print("indexPath Selecionado\(indexPathSelecionado)")
-            PacoteViagemDao().salvarPacoteViagem(self.listaDePacotes[indexPathSelecionado])
-    
+            
+            if self.verificaFavoritos(self.listaDePacotes[indexPathSelecionado]) {
+                let id = self.listaDePacotes[indexPathSelecionado].id
+                PacoteViagemDao().deletaPacoteViagem(id)
+                celulaPacote.preencheImagem = false
+            } else {
+                PacoteViagemDao().salvarPacoteViagem(self.listaDePacotes[indexPathSelecionado])
+                celulaPacote.preencheImagem = true
+            }
         }
         
         return celulaPacote

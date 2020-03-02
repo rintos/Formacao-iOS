@@ -20,8 +20,9 @@ class PacoteViagem {
     let nomeDoHotel: String
     let descricao: String
     let dataViagem: String
+    var favoritoStatus: Bool
     
-    init(id: Int = 0,titulo: String = "", quantidadeDeDias: Int = 0, preco:String = "", imageUrl: String = "", localizacao:String = "",  nomeDoHotel: String, descricao: String, dataViagem: String) {
+    init(id: Int = 0,titulo: String = "", quantidadeDeDias: Int = 0, preco:String = "", imageUrl: String = "", localizacao:String = "",  nomeDoHotel: String, descricao: String, dataViagem: String, favoritoStatus: Bool = false) {
         self.id = id
         self.titulo = titulo
         self.quantidadeDeDias = quantidadeDeDias
@@ -31,10 +32,11 @@ class PacoteViagem {
         self.nomeDoHotel = nomeDoHotel
         self.descricao = descricao
         self.dataViagem = dataViagem
+        self.favoritoStatus = favoritoStatus
     }
     
     convenience init() {
-        self.init(id: 0, titulo: "", quantidadeDeDias: 0, preco: "", imageUrl: "", localizacao: "", nomeDoHotel: "", descricao: "", dataViagem: "")
+        self.init(id: 0, titulo: "", quantidadeDeDias: 0, preco: "", imageUrl: "", localizacao: "", nomeDoHotel: "", descricao: "", dataViagem: "", favoritoStatus: false)
     }
     
     func desserializaPacoteViagem (pacoteDict: [Dictionary<String, Any>]) -> [PacoteViagem] {

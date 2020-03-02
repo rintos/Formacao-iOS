@@ -19,33 +19,51 @@ class PacotesCollectionViewCell: UICollectionViewCell {
     
     var callback: (() -> ())?
     
+    var preencheImagem: Bool = false
+    var imagemFavoritoStatus = ""
+    let botaoFavorito = UIButton(frame: CGRect(x: 92, y: 8, width: 40, height: 40))
     
     override func awakeFromNib() {
-        let botaoFavorito = UIButton(frame: CGRect(x: 92, y: 8, width: 40, height: 40))
-        botaoFavorito.setImage(UIImage(systemName: "heart"), for: UIControlState.normal)
-        botaoFavorito.addTarget(self, action: #selector(pacoteViagemFavorito), for: UIControlEvents.touchUpInside)
-        addSubview(botaoFavorito)
+       // configutaBotaoFavorito()
     }
     
     // MARK: - Métodos
     
     func configuraCelula(_ pacoteViagem: PacoteViagem) {
+                
         labelTitulo.text = pacoteViagem.titulo
         let quantidadeDias = String(pacoteViagem.quantidadeDeDias)
         labelQuantidadeDias.text = "\(quantidadeDias) dias"
         labelPreco.text = "R$ \(pacoteViagem.preco)"
         imagemViagem.image = UIImage(named: pacoteViagem.imageUrl)
         
+            
+        if preencheImagem {
+                imagemFavoritoStatus = "heart.fill"
+            } else {
+                imagemFavoritoStatus = "heart"
+            }
+        
+        botaoFavorito.setImage(UIImage(systemName: imagemFavoritoStatus), for: UIControlState.normal)
+        botaoFavorito.addTarget(self, action: #selector(pacoteViagemFavorito), for: UIControlEvents.touchUpInside)
+        addSubview(botaoFavorito)
+         
         layer.borderWidth = 0.5
         layer.borderColor = UIColor(red: 85.0/255.0, green: 85.0/255.0, blue: 85.0/255.0, alpha: 1).cgColor
         layer.cornerRadius = 8
+ 
     }
     
     
     @IBAction func pacoteViagemFavorito(_ sender: UIButton) -> Void {
         callback?()
         
-    
+        if preencheImagem {
+            sender.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        } else {
+            sender.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+        
     }
 }
 
