@@ -45,11 +45,26 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
     }
     
     func getListaPacotes() {
+        
+        let listaPacoteFavorito = PacoteViagemDao().recuperaPacotesFavoritos()
+
         PacotesAPI().recuperaListaDePacotesAPI(completion: { (listaPacotes) in
             for item in listaPacotes {
                // print("Pacote----> \(item.nomeDoHotel) URL IMagem:\(item.imageUrl)")
                 self.listaDePacotes.append(item)
             }
+            
+            for favorito in listaPacoteFavorito {
+                let id = Int(favorito.id)
+                self.listaDePacotes = self.listaDePacotes.map{
+                    var mutablePacotes = $0
+                    if $0.id == id {
+                        mutablePacotes.favoritoStatus = true
+                    }
+                    return mutablePacotes
+                }
+            }
+            
             
             self.listaViagens = self.listaDePacotes
 
@@ -103,7 +118,11 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
         let celulaPacote = collectionView.dequeueReusableCell(withReuseIdentifier: "celulaPacote", for: indexPath) as! PacotesCollectionViewCell
         let pacoteAtual = listaDePacotes[indexPath.item]
         celulaPacote.configuraCelula(pacoteAtual)
-    
+        
+        if pacoteAtual.favoritoStatus {
+            celulaPacote.botaoFavorito.setImage(UIImage(systemName: "heart.fill"), for: UIControlState.normal)
+        }
+        
         celulaPacote.callback = { [unowned self] in
             let indexPathSelecionado =  indexPath.row
             print("indexPath Selecionado\(indexPathSelecionado)")
