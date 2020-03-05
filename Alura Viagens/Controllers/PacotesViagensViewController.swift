@@ -20,6 +20,7 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
     
     var listaViagens: [PacoteViagem] = []
     var listaDePacotes: [PacoteViagem] = []
+    var pacotesViagens: [PacoteViagem] = []
     var verificaFavorito: Bool = true
 
     // MARK: - View Life Cycle
@@ -30,43 +31,27 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
         pesquisarViagens.delegate = self
         labelContadorPacotes.text = atualizaContadorLabel()
         getListaPacotes()
-       // verificaFavoritos()
+        
+        colecaoPacotesViagens.keyboardDismissMode = .onDrag
     }
     
     override func viewDidAppear(_ animated: Bool) {
         labelContadorPacotes.text = atualizaContadorLabel()
-        //verificaFavoritos()
     }
     
     // MARK: - Métodos
-    
     func atualizaContadorLabel() -> String {
-        return listaDePacotes.count == 1 ? "1 pacote encontrado" : "\(listaDePacotes.count) pacotes encontrados"
+        return pacotesViagens.count == 1 ? "1 pacote encontrado" : "\(pacotesViagens.count) pacotes encontrados"
     }
     
     func getListaPacotes() {
         
-        let listaPacoteFavorito = PacoteViagemDao().recuperaPacotesFavoritos()
-
         PacotesAPI().recuperaListaDePacotesAPI(completion: { (listaPacotes) in
             for item in listaPacotes {
-               // print("Pacote----> \(item.nomeDoHotel) URL IMagem:\(item.imageUrl)")
                 self.listaDePacotes.append(item)
             }
-            
-//            for favorito in listaPacoteFavorito {
-//                let id = Int(favorito.id)
-//                self.listaDePacotes = self.listaDePacotes.map{
-//                    var mutablePacotes = $0
-//                    if $0.id == id {
-//                        mutablePacotes.favoritoStatus = true
-//                    }
-//                    return mutablePacotes
-//                }
-//            }
-            
-            
             self.listaViagens = self.listaDePacotes
+            self.pacotesViagens = self.listaDePacotes
 
             self.colecaoPacotesViagens.reloadData()
             
@@ -82,7 +67,6 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
         for favorito in listaPacoteFavorito {
             let idFavorito = Int(favorito.id)
             if idFavorito == pacoteSelecionado.id {
-            print("Filme Favorito\(pacoteSelecionado.titulo)")
                 return true
             }
         }
@@ -100,9 +84,16 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
     // MARK: - UISearchBarDelegate
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        guard !searchText.isEmpty else {
+            pacotesViagens = listaViagens
+            colecaoPacotesViagens.reloadData()
+            return
+        }
+        
         listaViagens = listaDePacotes
         if searchText != "" {
-            listaViagens = listaViagens.filter({ $0.titulo.contains(searchText) })
+            pacotesViagens = pacotesViagens.filter({ $0.titulo.contains(searchText) })
         }
         labelContadorPacotes.text = atualizaContadorLabel()
         colecaoPacotesViagens.reloadData()
@@ -111,12 +102,12 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
     // MARK: - UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return listaDePacotes.count
+        return pacotesViagens.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let celulaPacote = collectionView.dequeueReusableCell(withReuseIdentifier: "celulaPacote", for: indexPath) as! PacotesCollectionViewCell
-        let pacoteAtual = listaDePacotes[indexPath.item]
+        let pacoteAtual = pacotesViagens[indexPath.item]
         celulaPacote.configuraCelula(pacoteAtual)
         
         if pacoteAtual.favoritoStatus {
@@ -125,14 +116,13 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
         
         celulaPacote.callback = { [unowned self] in
             let indexPathSelecionado =  indexPath.row
-            print("indexPath Selecionado\(indexPathSelecionado)")
             
-            if self.verificaFavoritos(self.listaDePacotes[indexPathSelecionado]) {
-                let id = self.listaDePacotes[indexPathSelecionado].id
+            if self.verificaFavoritos(self.pacotesViagens[indexPathSelecionado]) {
+                let id = self.pacotesViagens[indexPathSelecionado].id
                 PacoteViagemDao().deletaPacoteViagem(id)
                 celulaPacote.preencheImagem = false
             } else {
-                PacoteViagemDao().salvarPacoteViagem(self.listaDePacotes[indexPathSelecionado])
+                PacoteViagemDao().salvarPacoteViagem(self.pacotesViagens[indexPathSelecionado])
                 celulaPacote.preencheImagem = true
             }
         }
@@ -143,7 +133,7 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
     // MARK: - UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let pacote = listaViagens[indexPath.item]
+        let pacote = pacotesViagens[indexPath.item]
         print("\(pacote.titulo) clicado")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "detalhes") as! DetalhesViagemViewController

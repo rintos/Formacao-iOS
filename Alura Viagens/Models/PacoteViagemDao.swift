@@ -52,6 +52,8 @@ class PacoteViagemDao: NSObject {
         pacoteViagemObject?.setValue(dataViagem, forKey: "dataViagem")
         
         atualizaContexto()
+        print("Pacote foi salvo com sucesso")
+
     }
     
     func recuperaPacotesFavoritos() -> [PacotesDeViagens] {
@@ -78,7 +80,6 @@ class PacoteViagemDao: NSObject {
     func atualizaContexto () {
         do {
             try contexto.save()
-            print("Pacote foi salvo com sucesso")
         } catch {
             print(error.localizedDescription)
             print("Erro na tentativa de salvar")
@@ -96,6 +97,8 @@ class PacoteViagemDao: NSObject {
             }
         }
         atualizaContexto()
+        print("Pacote foi Deletado")
+
     }
     
 }
