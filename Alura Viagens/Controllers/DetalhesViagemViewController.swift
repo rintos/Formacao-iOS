@@ -38,7 +38,7 @@ class DetalhesViagemViewController: UIViewController {
     
     func configuraOutlets() {
         guard let pacote = pacoteSelecionado else { return }
-        imagemPacoteViagem.image = UIImage(named: pacote.imageUrl)
+        imagemPacoteViagem.image = UIImage(named: "\(pacote.id).jpg")
         labelTituloPacoteViagem.text = pacote.titulo
         labelDescricaoPacoteViagem.text = pacote.descricao
         labelDataViagem.text = pacote.dataViagem

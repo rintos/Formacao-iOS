@@ -54,16 +54,16 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
                 self.listaDePacotes.append(item)
             }
             
-            for favorito in listaPacoteFavorito {
-                let id = Int(favorito.id)
-                self.listaDePacotes = self.listaDePacotes.map{
-                    var mutablePacotes = $0
-                    if $0.id == id {
-                        mutablePacotes.favoritoStatus = true
-                    }
-                    return mutablePacotes
-                }
-            }
+//            for favorito in listaPacoteFavorito {
+//                let id = Int(favorito.id)
+//                self.listaDePacotes = self.listaDePacotes.map{
+//                    var mutablePacotes = $0
+//                    if $0.id == id {
+//                        mutablePacotes.favoritoStatus = true
+//                    }
+//                    return mutablePacotes
+//                }
+//            }
             
             
             self.listaViagens = self.listaDePacotes

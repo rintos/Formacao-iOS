@@ -21,7 +21,7 @@ class PacotesCollectionViewCell: UICollectionViewCell {
     
     var preencheImagem: Bool = false
     var imagemFavoritoStatus = ""
-    let botaoFavorito = UIButton(frame: CGRect(x: 120, y: 8, width: 40, height: 40))
+    let botaoFavorito = UIButton(frame: CGRect(x: 50, y: 8, width: 40, height: 40))
     
     override func awakeFromNib() {
        // configutaBotaoFavorito()
