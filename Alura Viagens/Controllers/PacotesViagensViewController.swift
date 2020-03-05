@@ -85,6 +85,12 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
+        if searchBar.text == ""{
+            labelContadorPacotes.isHidden = true
+        } else {
+            labelContadorPacotes.isHidden = false
+        }
+        
         guard !searchText.isEmpty else {
             pacotesViagens = listaViagens
             colecaoPacotesViagens.reloadData()
