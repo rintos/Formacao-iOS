@@ -46,12 +46,25 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
     
     func getListaPacotes() {
         
+        let listaFavortios = PacoteViagemDao().recuperaPacotesFavoritos()
+        
         PacotesAPI().recuperaListaDePacotesAPI(completion: { (listaPacotes) in
-            for item in listaPacotes {
-                self.listaDePacotes.append(item)
-            }
+            print("Contagem da API:\(listaPacotes.count)")
+            self.listaDePacotes = listaPacotes
             self.listaViagens = self.listaDePacotes
             self.pacotesViagens = self.listaDePacotes
+            
+            for favorito in listaFavortios {
+                let id = Int(favorito.id)
+                self.pacotesViagens = self.pacotesViagens.map{
+                    var mutablePacoteViagem = $0
+                    if $0.id == id {
+                        mutablePacoteViagem.favoritoStatus = true
+                    }
+                    return mutablePacoteViagem
+                }
+                
+            }
 
             self.colecaoPacotesViagens.reloadData()
             
