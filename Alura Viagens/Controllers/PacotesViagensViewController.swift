@@ -66,6 +66,8 @@ class PacotesViagensViewController: UIViewController, UICollectionViewDataSource
                 
             }
 
+            self.labelContadorPacotes.text = self.atualizaContadorLabel()
+            
             self.colecaoPacotesViagens.reloadData()
             
         }) { (error) in

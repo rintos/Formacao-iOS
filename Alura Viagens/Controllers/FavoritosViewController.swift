@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavoritosViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class FavoritosViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var favoritosCollectionView: UICollectionView!
 
@@ -50,5 +50,11 @@ class FavoritosViewController: UIViewController, UICollectionViewDelegate, UICol
         return celula
     }
     
+    
+    // MARK: - UICollectionViewLayout
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return UIDevice.current.userInterfaceIdiom == .phone ? CGSize(width: collectionView.bounds.width/2-20, height: 160) : CGSize(width: collectionView.bounds.width/3-20, height: 250)
+    }
 
 }
